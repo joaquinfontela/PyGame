@@ -1,6 +1,5 @@
 import pygame
 from MainMenu import MainMenu
-from EventHandler import EventHandler
 
 
 class Window:
@@ -25,6 +24,7 @@ class Window:
 
     def display(self):
         self._setBackgroundColor(0, 0, 0)
+        pygame.mouse.set_visible(False)
         pygame.display.flip()
         pygame.display.set_caption('PySnake')
         self.running = True
@@ -33,7 +33,8 @@ class Window:
     def _mainLoop(self):
         while self.running:
             for event in pygame.event.get():
-                EventHandler(self).handleEvent(event)
+                if event.type == pygame.QUIT:
+                    self.stopRunning()
 
             MainMenu(self)
 
