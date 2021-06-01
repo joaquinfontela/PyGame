@@ -18,9 +18,15 @@ class Snake:
         self.direction = Direction(self.window, RightDirection())
 
     def moveForward(self):
+        '''
+        Moves the snake one step in the direction it was moving.
+        '''
         self.body = self.direction.move(self.body, CIRCLE_DIAMETER)
 
     def draw(self):
+        '''
+        Draws the snake in the window of the game.
+        '''
         for pos in self.body:
             pygame.draw.circle(self.window.screen, SNAKE_COLOR,
                                (pos[0], pos[1]), CIRCLE_DIAMETER/2)
@@ -42,6 +48,9 @@ class Snake:
         self.body.append(self.direction.getLastPoppedBodyPosition())
 
     def collisionWithMyself(self):
+        '''
+        Returns a boolean indicating if the snake is having a collision with itself.
+        '''
         positionsOfBody = {tuple(pos): self.body.count(pos)
                            for pos in self.body}
         return len(list(filter(lambda x: x > 1, positionsOfBody.values()))) > 0

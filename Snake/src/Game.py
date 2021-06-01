@@ -34,6 +34,9 @@ SPECIAL_FOOD_COLLECTED_SOUND.set_volume(0.5)
 class Game:
 
     def __init__(self, window):
+        '''
+        Initializes the main loop of the game.
+        '''
         pygame.mixer.init()
         self.window = window
         self.window.screen.fill(BACKGROUND_COLOR)
@@ -55,10 +58,16 @@ class Game:
                     self.window.stopRunning()
                 if event.type == pygame.KEYDOWN:
                     self.handleKeyDown(event)
+                    self.randomSpecialFoodSpawn()
+                    continue
             self.updateSnakePosition()
             self.randomSpecialFoodSpawn()
 
     def handleKeyDown(self, event):
+        '''
+        Handles the event when a key is pressed.
+        It ignores the event if the key pressed is not one of the four arrows.
+        '''
         if event.key == pygame.K_DOWN:
             self.snake.changeDirection(DownDirection())
         elif event.key == pygame.K_UP:
@@ -72,6 +81,9 @@ class Game:
         self.updateSnakePosition()
 
     def updateSnakePosition(self):
+        '''
+        Updates the position of the snake logically and graphically.
+        '''
         pygame.display.flip()
         self.snake.moveForward()
         self.verifyCollisionWithFood()
@@ -85,9 +97,16 @@ class Game:
             self.open = False
 
     def _setRandomFoodPosition(self):
+        '''
+        Sets a random new position for the food.
+        '''
         self.foodPosition = self._getRandomFoodPosition()
 
     def _getRandomFoodPosition(self):
+        '''
+        Returns a random position for food in the map.
+        If the player is in that position, it is calculated again.
+        '''
         screenWidth, screenHeight = self.window.getDimensions()
         foodPosition = (randrange(
             CIRCLE_RADIUS, screenWidth - CIRCLE_RADIUS, CIRCLE_RADIUS * 2), randrange(
@@ -97,6 +116,9 @@ class Game:
         return foodPosition
 
     def drawFood(self):
+        '''
+        Draws food and special food if it applies.
+        '''
         pygame.draw.circle(self.window.screen, NORMAL_FOOD_COLOR,
                            self.foodPosition, CIRCLE_RADIUS)
         if self.specialFoodPosition:
@@ -104,6 +126,10 @@ class Game:
                                self.specialFoodPosition, CIRCLE_RADIUS)
 
     def verifyCollisionWithFood(self):
+        '''
+        Verifies if the snake has eaten the food and scores the corresponding points,
+        it also randoms a new food position.
+        '''
         if list(self.foodPosition) in self.snake.getBodyPosition():
             self._setRandomFoodPosition()
             self.snake.eatFood()
@@ -116,12 +142,19 @@ class Game:
             pygame.mixer.Sound.play(SPECIAL_FOOD_COLLECTED_SOUND)
 
     def _updateScore(self):
+        '''
+        Updates graphically the current score of the player.
+        '''
         scoreText = TextFormatter().formatText(
             f"Score: {self.score}", FONT, 60, SCORE_COLOR)
         self.window.screen.blit(
             scoreText, (150 - (scoreText.get_rect()[2]/2), 10))
 
     def randomSpecialFoodSpawn(self):
+        '''
+        Takes care of the special food spawn logic: how much time left for it to disappear, 
+        and when to randomize its appearance.
+        '''
         self.specialFoodCountdown -= 1
         if self.specialFoodCountdown == 0:
             self.specialFoodPosition = None

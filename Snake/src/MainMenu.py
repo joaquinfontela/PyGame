@@ -21,6 +21,9 @@ class MainMenu:
         self._loop()
 
     def _displayTexts(self):
+        '''
+        Displays the text in the main menu.
+        '''
         self.window.screen.fill(BACKGROUND_COLOR)
         title = TextFormatter().formatText("PySnake", FONT, 150, LOGO_COLOR)
         playButton = TextFormatter().formatText(
@@ -37,6 +40,11 @@ class MainMenu:
         pygame.display.update()
 
     def _loop(self):
+        '''
+        Executes the main loop of the main menu,
+        which is in charge of identifying which option is selected
+        and updating the information graphically in the correct moment.
+        '''
         while self.open:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:

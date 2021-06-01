@@ -29,6 +29,9 @@ class Window:
         self._mainLoop()
 
     def _mainLoop(self):
+        '''
+        Initializes the main loop of the application.
+        '''
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
