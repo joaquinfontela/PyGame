@@ -3,6 +3,7 @@ from pygame.constants import KEYUP
 from TextFormatter.TextFormatter import TextFormatter
 from Colors.Colors import BACKGROUND_MENU_COLOR as BACKGROUND_COLOR
 from Colors.Colors import green as GREEN, white as WHITE
+from Game import Game
 
 
 FONT = "Fonts/retro.ttf"
@@ -36,9 +37,12 @@ class MainMenu:
     def _loop(self):
         while self.open:
             for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN and event.key in (pygame.K_DOWN, pygame.K_UP):
-                    self._switchPlaySelected()
-                    self._displayTexts()
+                if event.type == pygame.KEYDOWN:
+                    if event.key in (pygame.K_DOWN, pygame.K_UP):
+                        self._switchPlaySelected()
+                        self._displayTexts()
+                    if event.key == pygame.K_RETURN:
+                        Game(self.window)
                 if event.type == pygame.QUIT or \
                         (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and not self.playSelected):
                     self.open = False

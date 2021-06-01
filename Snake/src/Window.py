@@ -9,7 +9,6 @@ class Window:
         Initializes a Window object with width and height attributes.
         '''
         pygame.init()
-        print(sorted(pygame.font.get_fonts()))
         self.width = width
         self.height = height
         self._screen = pygame.display.set_mode((width, height))
@@ -40,6 +39,7 @@ class Window:
 
     def stopRunning(self):
         self.running = False
+        quit()
 
     def _setBackgroundColor(self, r, g, b):
         color = (r, g, b)
