@@ -22,7 +22,6 @@ class Window:
         return (self.width, self.height)
 
     def display(self):
-        self._setBackgroundColor(0, 0, 0)
         pygame.mouse.set_visible(False)
         pygame.display.flip()
         pygame.display.set_caption('PySnake')
@@ -40,7 +39,3 @@ class Window:
     def stopRunning(self):
         self.running = False
         quit()
-
-    def _setBackgroundColor(self, r, g, b):
-        color = (r, g, b)
-        self._screen.fill(color)

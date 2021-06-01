@@ -1,0 +1,52 @@
+{
+    "font": "Fonts/retro.ttf",
+    "circle_diameter": 12,
+    "colors": {
+        "score": [
+            150,
+            150,
+            150
+        ],
+        "background": [
+            10,
+            25,
+            50
+        ],
+        "snake": [
+            0,
+            255,
+            0
+        ],
+        "logo": [
+            0,
+            255,
+            0
+        ],
+        "selected_option": [
+            0,
+            255,
+            0
+        ],
+        "non_selected_option": [
+            255,
+            255,
+            255
+        ],
+        "normal_food": [
+            255,
+            255,
+            0
+        ],
+        "special_food": [
+            255,
+            115,
+            0
+        ]
+    },
+    "sounds": {
+        "player_lost": "audio/player_lost.ogg",
+        "food_collected": "audio/food_collected.ogg",
+        "special_food_collected": "audio/special_food_collected.ogg"
+    },
+    "speed_diameters_per_second": 10
+}

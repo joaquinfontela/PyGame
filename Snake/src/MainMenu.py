@@ -1,11 +1,13 @@
 import pygame
 from pygame.constants import KEYUP
 from TextFormatter.TextFormatter import TextFormatter
-from Colors.Colors import BACKGROUND_MENU_COLOR as BACKGROUND_COLOR
-from Colors.Colors import green as GREEN, white as WHITE
+from Config.configParser import CONFIGS
 from Game import Game
 
-
+BACKGROUND_COLOR = CONFIGS["colors"]["background"]
+LOGO_COLOR = CONFIGS["colors"]["logo"]
+SELECTED_COLOR = CONFIGS["colors"]["selected_option"]
+NON_SELECTED_COLOR = CONFIGS["colors"]["non_selected_option"]
 FONT = "Fonts/retro.ttf"
 
 
@@ -20,11 +22,11 @@ class MainMenu:
 
     def _displayTexts(self):
         self.window.screen.fill(BACKGROUND_COLOR)
-        title = TextFormatter().formatText("PySnake", FONT, 150, GREEN)
+        title = TextFormatter().formatText("PySnake", FONT, 150, LOGO_COLOR)
         playButton = TextFormatter().formatText(
-            "PLAY", FONT, 100, GREEN if self.playSelected else WHITE)
+            "PLAY", FONT, 100, SELECTED_COLOR if self.playSelected else NON_SELECTED_COLOR)
         quitButton = TextFormatter().formatText(
-            "QUIT", FONT, 100, WHITE if self.playSelected else GREEN)
+            "QUIT", FONT, 100, NON_SELECTED_COLOR if self.playSelected else SELECTED_COLOR)
         screenWidth, _ = self.window.getDimensions()
         self.window.screen.blit(
             title, (screenWidth/2 - (title.get_rect()[2]/2), 80))

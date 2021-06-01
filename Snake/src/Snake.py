@@ -1,9 +1,10 @@
 from SnakeUtils.Direction.Direction import Direction
 import pygame
-from Colors.Colors import green as GREEN
+from Config.configParser import CONFIGS
 from SnakeUtils.Direction.RightDirection import RightDirection
 
-CIRCLE_DIAMETER = 12
+CIRCLE_DIAMETER = CONFIGS["circle_diameter"]
+SNAKE_COLOR = CONFIGS["colors"]["snake"]
 
 
 class Snake:
@@ -21,7 +22,7 @@ class Snake:
 
     def draw(self):
         for pos in self.body:
-            pygame.draw.circle(self.window.screen, GREEN,
+            pygame.draw.circle(self.window.screen, SNAKE_COLOR,
                                (pos[0], pos[1]), CIRCLE_DIAMETER/2)
         screenWidth, screenHeight = self.window.getDimensions()
         self.body = [[pos[0] if pos[0] >= 0 else screenWidth + pos[0],
