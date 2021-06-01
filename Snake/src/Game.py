@@ -54,15 +54,16 @@ class Game:
             time.sleep(SLEEP_PER_UPDATE)
             self.moves += 1
             for event in pygame.event.get():
+                self.changedDirection = False
                 if event.type == pygame.QUIT:
                     self.open = False
                     self.window.stopRunning()
                 if event.type == pygame.KEYDOWN:
                     self.handleKeyDown(event)
                     self.randomSpecialFoodSpawn()
-                    continue
-            self.updateSnakePosition()
-            self.randomSpecialFoodSpawn()
+            if not self.changedDirection:
+                self.updateSnakePosition()
+                self.randomSpecialFoodSpawn()
 
     def handleKeyDown(self, event):
         '''
@@ -79,6 +80,7 @@ class Game:
             self.snake.changeDirection(RightDirection())
         else:
             return
+        self.changedDirection = True
         self.updateSnakePosition()
 
     def updateSnakePosition(self):
