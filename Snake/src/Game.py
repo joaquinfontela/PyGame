@@ -12,10 +12,12 @@ import MainMenu
 
 CIRCLE_RADIUS = CONFIGS["circle_diameter"]/2
 FONT = CONFIGS["font"]
-BACKGROUND_COLOR = CONFIGS["colors"]["background"]
-SCORE_COLOR = CONFIGS["colors"]["score"]
-NORMAL_FOOD_COLOR = CONFIGS["colors"]["normal_food"]
-SPECIAL_FOOD_COLOR = CONFIGS["colors"]["special_food"]
+
+THEME = CONFIGS["current_theme"]
+BACKGROUND_COLOR = CONFIGS["colors"][THEME]["background"]
+SCORE_COLOR = CONFIGS["colors"][THEME]["score"]
+NORMAL_FOOD_COLOR = CONFIGS["colors"][THEME]["normal_food"]
+SPECIAL_FOOD_COLOR = CONFIGS["colors"][THEME]["special_food"]
 SLEEP_PER_UPDATE = 1/CONFIGS["speed_diameters_per_second"]
 
 PLAYER_LOST_SOUND_PATH = CONFIGS["sounds"]["player_lost"]

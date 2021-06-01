@@ -4,7 +4,9 @@ from Config.configParser import CONFIGS
 from SnakeUtils.Direction.RightDirection import RightDirection
 
 CIRCLE_DIAMETER = CONFIGS["circle_diameter"]
-SNAKE_COLOR = CONFIGS["colors"]["snake"]
+
+THEME = CONFIGS["current_theme"]
+SNAKE_COLOR = CONFIGS["colors"][THEME]["snake"]
 
 
 class Snake:
