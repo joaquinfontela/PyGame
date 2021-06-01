@@ -8,6 +8,7 @@ from SnakeUtils.Direction.UpDirection import UpDirection
 from SnakeUtils.Direction.DownDirection import DownDirection
 from random import randrange
 from TextFormatter.TextFormatter import TextFormatter
+import MainMenu
 
 CIRCLE_RADIUS = CONFIGS["circle_diameter"]/2
 FONT = CONFIGS["font"]
@@ -95,6 +96,7 @@ class Game:
         if self.snake.collisionWithMyself():
             pygame.mixer.Sound.play(PLAYER_LOST_SOUND)
             self.open = False
+            MainMenu.MainMenu(self.window)
 
     def _setRandomFoodPosition(self):
         '''
@@ -161,3 +163,9 @@ class Game:
         if self.moves % 250 == 0:
             self.specialFoodPosition = self._getRandomFoodPosition()
             self.specialFoodCountdown = 50
+        if self.specialFoodPosition:
+            countdown = TextFormatter().formatText(str(self.specialFoodCountdown),
+                                                   FONT, 70, SPECIAL_FOOD_COLOR)
+            self.window.screen.blit(
+                countdown, (self.window.getDimensions()[0] - 100, 10))
+            pygame.display.update()

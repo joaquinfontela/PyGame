@@ -2,7 +2,7 @@ import pygame
 from pygame.constants import KEYUP
 from TextFormatter.TextFormatter import TextFormatter
 from Config.configParser import CONFIGS
-from Game import Game
+import Game
 
 BACKGROUND_COLOR = CONFIGS["colors"]["background"]
 LOGO_COLOR = CONFIGS["colors"]["logo"]
@@ -52,7 +52,7 @@ class MainMenu:
                         self._switchPlaySelected()
                         self._displayTexts()
                     if event.key == pygame.K_RETURN:
-                        Game(self.window)
+                        Game.Game(self.window)
                 if event.type == pygame.QUIT or \
                         (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and not self.playSelected):
                     self.open = False
