@@ -1,6 +1,6 @@
 {
     "font": "Fonts/retro.ttf",
-    "circle_diameter": 12,
+    "circle_diameter": 20,
     "colors": {
         "score": [
             150,

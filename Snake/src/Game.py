@@ -22,6 +22,7 @@ FOOD_COLLECTED_SOUND_PATH = CONFIGS["sounds"]["food_collected"]
 SPECIAL_FOOD_COLLECTED_SOUND_PATH = CONFIGS["sounds"]["special_food_collected"]
 pygame.mixer.init()
 PLAYER_LOST_SOUND = pygame.mixer.Sound(PLAYER_LOST_SOUND_PATH)
+PLAYER_LOST_SOUND.set_volume(0.5)
 FOOD_COLLECTED_SOUND = pygame.mixer.Sound(
     FOOD_COLLECTED_SOUND_PATH)
 FOOD_COLLECTED_SOUND.set_volume(0.5)
@@ -48,12 +49,10 @@ class Game:
         while self.open:
             time.sleep(SLEEP_PER_UPDATE)
             self.moves += 1
-            eventList = pygame.event.get()
-            if pygame.QUIT in map(lambda e: e.type, eventList):
-                self.open = False
-                self.window.stopRunning()
-            if eventList:
-                event = eventList[0]
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.open = False
+                    self.window.stopRunning()
                 if event.type == pygame.KEYDOWN:
                     self.handleKeyDown(event)
             self.updateSnakePosition()
@@ -68,6 +67,9 @@ class Game:
             self.snake.changeDirection(LeftDirection())
         elif event.key == pygame.K_RIGHT:
             self.snake.changeDirection(RightDirection())
+        else:
+            return
+        self.updateSnakePosition()
 
     def updateSnakePosition(self):
         pygame.display.flip()
@@ -109,7 +111,7 @@ class Game:
             pygame.mixer.Sound.play(FOOD_COLLECTED_SOUND)
         if self.specialFoodPosition and list(self.specialFoodPosition) in self.snake.getBodyPosition():
             self.snake.eatFood()
-            self.score += 50
+            self.score += (50 + self.specialFoodCountdown)
             self.specialFoodPosition = None
             pygame.mixer.Sound.play(SPECIAL_FOOD_COLLECTED_SOUND)
 
