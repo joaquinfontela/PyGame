@@ -1,2 +1,2 @@
 # PyPong
-A PyGame version of the classic Pong game.
+A PyGame version of some classics.
