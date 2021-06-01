@@ -51,5 +51,5 @@
         "select_option": "audio/select_option.ogg",
         "select_start_game": "audio/select_start_game.ogg"
     },
-    "speed_diameters_per_second": 5
+    "speed_diameters_per_second": 10
 }

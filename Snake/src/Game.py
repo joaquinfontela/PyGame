@@ -47,18 +47,20 @@ class Game:
         self.snake = Snake(
             self.window, (int(CIRCLE_RADIUS * 21), int(CIRCLE_RADIUS * 21)))
         self._setRandomFoodPosition()
+        self.changedDirection = False
         self.specialFoodPosition = None
         self.specialFoodCountdown = 0
         pygame.display.update()
         while self.open:
             time.sleep(SLEEP_PER_UPDATE)
             self.moves += 1
+            self.changedDirection = False
             for event in pygame.event.get():
                 self.changedDirection = False
                 if event.type == pygame.QUIT:
                     self.open = False
                     self.window.stopRunning()
-                if event.type == pygame.KEYDOWN:
+                if event.type == pygame.KEYUP:
                     self.handleKeyDown(event)
                     self.randomSpecialFoodSpawn()
             if not self.changedDirection:
