@@ -76,7 +76,7 @@ class MainMenu:
                         if self.buttonSelected % 3 == 1:
                             pygame.mixer.Sound.play(
                                 SELECT_START_GAME_SOUND)
-                            Game.Game(self.window)
+                            Game.Game(self.window, 2)
                         elif self.buttonSelected % 3 == 2:
                             pygame.mixer.Sound.play(
                                 SELECT_OPTION_SOUND)

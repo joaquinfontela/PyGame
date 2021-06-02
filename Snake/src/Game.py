@@ -8,6 +8,7 @@ from SnakeUtils.Direction.UpDirection import UpDirection
 from SnakeUtils.Direction.DownDirection import DownDirection
 from random import randrange
 from TextFormatter.TextFormatter import TextFormatter
+from LevelWalls import LevelWalls
 import MainMenu
 
 CIRCLE_RADIUS = CONFIGS["circle_diameter"]/2
@@ -18,6 +19,7 @@ BACKGROUND_COLOR = CONFIGS["colors"][THEME]["background"]
 SCORE_COLOR = CONFIGS["colors"][THEME]["score"]
 NORMAL_FOOD_COLOR = CONFIGS["colors"][THEME]["normal_food"]
 SPECIAL_FOOD_COLOR = CONFIGS["colors"][THEME]["special_food"]
+WALL_COLOR = CONFIGS["colors"][THEME]["walls"]
 SLEEP_PER_UPDATE = 1/CONFIGS["speed_diameters_per_second"]
 
 PLAYER_LOST_SOUND_PATH = CONFIGS["sounds"]["player_lost"]
@@ -39,18 +41,19 @@ pygame.mixer.music.set_volume(0.05)
 
 class Game:
 
-    def __init__(self, window):
+    def __init__(self, window, level):
         '''
         Initializes the main loop of the game.
         '''
         pygame.mixer.init()
         self.window = window
+        self.walls = LevelWalls().getLevelWalls(self.window, level)
         self.window.screen.fill(BACKGROUND_COLOR)
         self.moves = 0
         self.open = True
         self.score = 0
         self.snake = Snake(
-            self.window, (int(CIRCLE_RADIUS * 21), int(CIRCLE_RADIUS * 21)))
+            self.window, (int(CIRCLE_RADIUS * 21), int(CIRCLE_RADIUS * 21)), self.walls)
         self._setRandomFoodPosition()
         self.changedDirection = False
         self.specialFoodPosition = None
@@ -99,11 +102,12 @@ class Game:
         self.snake.moveForward()
         self.verifyCollisionWithFood()
         self.window.screen.fill(BACKGROUND_COLOR)
-        self._updateScore()
         self.drawFood()
         self.snake.draw()
+        self.drawWalls()
+        self._updateScore()
         pygame.display.update()
-        if self.snake.collisionWithMyself():
+        if self.snake.collisionWithMyself() or self.snake.collisionWithWalls():
             pygame.mixer.Sound.play(PLAYER_LOST_SOUND)
             pygame.mixer.music.stop()
             self.open = False
@@ -124,9 +128,15 @@ class Game:
         foodPosition = (randrange(
             CIRCLE_RADIUS, screenWidth - CIRCLE_RADIUS, CIRCLE_RADIUS * 2), randrange(
             CIRCLE_RADIUS, screenHeight - CIRCLE_RADIUS, CIRCLE_RADIUS * 2))
-        if list(foodPosition) in self.snake.getBodyPosition():
+        if list(foodPosition) in self.snake.getBodyPosition() or list(foodPosition) in self.walls:
             return self._getRandomFoodPosition()
         return foodPosition
+
+    def drawWalls(self):
+        for wall in self.walls:
+            x, y = wall
+            pygame.draw.circle(self.window.screen,
+                               WALL_COLOR, (x, y), CIRCLE_RADIUS)
 
     def drawFood(self):
         '''
@@ -159,7 +169,7 @@ class Game:
         Updates graphically the current score of the player.
         '''
         scoreText = TextFormatter().formatText(
-            f"Score: {self.score}", FONT, 60, SCORE_COLOR)
+            f"Score: {self.score}", FONT, 60, SCORE_COLOR, 150)
         self.window.screen.blit(
             scoreText, (150 - (scoreText.get_rect()[2]/2), 10))
 

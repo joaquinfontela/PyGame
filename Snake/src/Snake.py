@@ -11,13 +11,14 @@ SNAKE_COLOR = CONFIGS["colors"][THEME]["snake"]
 
 class Snake:
 
-    def __init__(self, window, pos):
+    def __init__(self, window, pos, walls):
         self.window = window
         self.body = [[pos[0], pos[1]], [pos[0] - CIRCLE_DIAMETER, pos[1]],
                      [pos[0] - 2 * CIRCLE_DIAMETER, pos[1]
                       ], [pos[0] - 3 * CIRCLE_DIAMETER, pos[1]],
                      [pos[0] - 4 * CIRCLE_DIAMETER, pos[1]]]
         self.direction = Direction(self.window, RightDirection())
+        self.mapWalls = walls
 
     def moveForward(self):
         '''
@@ -56,3 +57,9 @@ class Snake:
         positionsOfBody = {tuple(pos): self.body.count(pos)
                            for pos in self.body}
         return len(list(filter(lambda x: x > 1, positionsOfBody.values()))) > 0
+
+    def collisionWithWalls(self):
+        for posBody in self.body:
+            if posBody in self.mapWalls:
+                return True
+        return False
