@@ -8,7 +8,7 @@ from SnakeUtils.Direction.UpDirection import UpDirection
 from SnakeUtils.Direction.DownDirection import DownDirection
 from random import randrange
 from TextFormatter.TextFormatter import TextFormatter
-from LevelWalls import LevelWalls
+from LevelConfiguration import LevelConfiguration
 import MainMenu
 
 CIRCLE_RADIUS = CONFIGS["circle_diameter"]/2
@@ -47,13 +47,14 @@ class Game:
         '''
         pygame.mixer.init()
         self.window = window
-        self.walls = LevelWalls().getLevelWalls(self.window, level)
+        self.walls = LevelConfiguration(
+            self.window, level).getLevelWalls()
         self.window.screen.fill(BACKGROUND_COLOR)
         self.moves = 0
         self.open = True
         self.score = 0
         self.snake = Snake(
-            self.window, (int(CIRCLE_RADIUS * 21), int(CIRCLE_RADIUS * 21)), self.walls)
+            self.window, LevelConfiguration(self.window, level).getInitialPosAndDirection(), self.walls)
         self._setRandomFoodPosition()
         self.changedDirection = False
         self.specialFoodPosition = None

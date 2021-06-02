@@ -1,7 +1,5 @@
-from SnakeUtils.Direction.Direction import Direction
 import pygame
 from Config.configParser import CONFIGS
-from SnakeUtils.Direction.RightDirection import RightDirection
 
 CIRCLE_DIAMETER = CONFIGS["circle_diameter"]
 
@@ -13,11 +11,10 @@ class Snake:
 
     def __init__(self, window, pos, walls):
         self.window = window
-        self.body = [[pos[0], pos[1]], [pos[0] - CIRCLE_DIAMETER, pos[1]],
-                     [pos[0] - 2 * CIRCLE_DIAMETER, pos[1]
-                      ], [pos[0] - 3 * CIRCLE_DIAMETER, pos[1]],
-                     [pos[0] - 4 * CIRCLE_DIAMETER, pos[1]]]
-        self.direction = Direction(self.window, RightDirection())
+        bodyPos = pos[0]
+        direction = pos[1]
+        self.body = bodyPos
+        self.direction = direction
         self.mapWalls = walls
 
     def moveForward(self):
