@@ -150,7 +150,7 @@ class Game:
             pygame.mixer.Sound.play(FOOD_COLLECTED_SOUND)
         if self.specialFoodPosition and list(self.specialFoodPosition) in self.snake.getBodyPosition():
             self.snake.eatFood()
-            self.score += (50 + self.specialFoodCountdown)
+            self.score += (50 + self.specialFoodCountdown * 2)
             self.specialFoodPosition = None
             pygame.mixer.Sound.play(SPECIAL_FOOD_COLLECTED_SOUND)
 
@@ -173,7 +173,7 @@ class Game:
             self.specialFoodPosition = None
         if self.moves % 250 == 0:
             self.specialFoodPosition = self._getRandomFoodPosition()
-            self.specialFoodCountdown = 50
+            self.specialFoodCountdown = 25
         if self.specialFoodPosition:
             countdown = TextFormatter().formatText(str(self.specialFoodCountdown),
                                                    FONT, 70, SPECIAL_FOOD_COLOR)

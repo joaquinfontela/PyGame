@@ -5,7 +5,16 @@ with open("Config/config.json") as configFile:
 
 
 def updateColorTheme(colorTheme):
-    with open("Config/config.json") as configFile:
+    with open("Config/config.json", "r") as configFile:
         CONFIGS = json.load(configFile)
-        CONFIGS["theme"] = colorTheme
-        json.dump(CONFIGS)
+        CONFIGS["current_theme"] = colorTheme
+    with open("Config/config.json", "w") as configFile:
+        json.dump(CONFIGS, configFile)
+
+
+def updateSpeed(speed):
+    with open("Config/config.json", "r") as configFile:
+        CONFIGS = json.load(configFile)
+        CONFIGS["speed_diameters_per_second"] = speed
+    with open("Config/config.json", "w") as configFile:
+        json.dump(CONFIGS, configFile)
