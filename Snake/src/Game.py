@@ -27,7 +27,7 @@ SLEEP_PER_UPDATE = 1/CONFIGS["speed_diameters_per_second"]
 PLAYER_LOST_SOUND_PATH = CONFIGS["sounds"]["player_lost"]
 FOOD_COLLECTED_SOUND_PATH = CONFIGS["sounds"]["food_collected"]
 SPECIAL_FOOD_COLLECTED_SOUND_PATH = CONFIGS["sounds"]["special_food_collected"]
-GAME_MUSIC_PATH = CONFIGS["sounds"]["game_music"]
+GAME_MUSIC = CONFIGS["sounds"]["game_music"]
 pygame.mixer.init()
 PLAYER_LOST_SOUND = pygame.mixer.Sound(PLAYER_LOST_SOUND_PATH)
 PLAYER_LOST_SOUND.set_volume(0.5)
@@ -37,8 +37,6 @@ FOOD_COLLECTED_SOUND.set_volume(0.5)
 SPECIAL_FOOD_COLLECTED_SOUND = pygame.mixer.Sound(
     SPECIAL_FOOD_COLLECTED_SOUND_PATH)
 SPECIAL_FOOD_COLLECTED_SOUND.set_volume(0.5)
-pygame.mixer.music.load(GAME_MUSIC_PATH)
-pygame.mixer.music.set_volume(0.05)
 
 
 class Game:
@@ -63,6 +61,8 @@ class Game:
         self.specialFoodPosition = None
         self.specialFoodCountdown = 0
         pygame.display.update()
+        pygame.mixer.music.load(GAME_MUSIC[self.level - 1])
+        pygame.mixer.music.set_volume(0.05)
         pygame.mixer.music.play(-1)
         while self.open:
             time.sleep(SLEEP_PER_UPDATE)
