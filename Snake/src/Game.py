@@ -1,6 +1,7 @@
 from Config.configParser import CONFIGS
 import pygame
 import time
+from random import randint
 from Snake import Snake, CIRCLE_DIAMETER
 from SnakeUtils.Direction.RightDirection import RightDirection
 from SnakeUtils.Direction.LeftDirection import LeftDirection
@@ -10,6 +11,7 @@ from random import randrange
 from TextFormatter.TextFormatter import TextFormatter
 from LevelConfiguration import LevelConfiguration
 import MainMenu
+from data.ScoresManager import ScoresManager
 
 CIRCLE_RADIUS = CONFIGS["circle_diameter"]/2
 FONT = CONFIGS["font"]
@@ -47,14 +49,15 @@ class Game:
         '''
         pygame.mixer.init()
         self.window = window
+        self.level = level
         self.walls = LevelConfiguration(
-            self.window, level).getLevelWalls()
+            self.window, self.level).getLevelWalls()
         self.window.screen.fill(BACKGROUND_COLOR)
         self.moves = 0
         self.open = True
         self.score = 0
         self.snake = Snake(
-            self.window, LevelConfiguration(self.window, level).getInitialPosAndDirection(), self.walls)
+            self.window, LevelConfiguration(self.window, self.level).getInitialPosAndDirection(), self.walls)
         self._setRandomFoodPosition()
         self.changedDirection = False
         self.specialFoodPosition = None
@@ -112,6 +115,8 @@ class Game:
             pygame.mixer.Sound.play(PLAYER_LOST_SOUND)
             pygame.mixer.music.stop()
             self.open = False
+            ScoresManager().save(
+                f"random_id{randint(10000, 99999)}", self.score, self.level)
             MainMenu.MainMenu(self.window)
 
     def _setRandomFoodPosition(self):
