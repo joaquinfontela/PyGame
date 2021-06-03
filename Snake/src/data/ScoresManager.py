@@ -1,5 +1,6 @@
 import json
 import time
+import pandas as pd
 
 
 class ScoresManager:
@@ -16,9 +17,28 @@ class ScoresManager:
         with open("data/scores.json", "w") as scoresFile:
             json.dump(scores, scoresFile)
 
-    # def resetScores(self):
-    #     scores = {"level": {}}
-    #     for level in range(1, 10+1):
-    #         scores["level"][str(level)] = {}
-    #     with open("data/scores.json", "w") as scoresFile:
-    #         json.dump(scores, scoresFile)
+    def get_n_HighestScores(self, level, n):
+        with open("data/scores.json", "r") as scoresFile:
+            scores = json.load(scoresFile)
+            levelScores = scores["level"][str(level)]
+            levelScores = levelScores.items()
+            levelScores = list(map(lambda x: [x[0], x[1]["score"],
+                                              x[1]["date_time"]], list(levelScores)))
+            return self.getNHighestScoresOfLevel(levelScores, n)
+
+    def getNHighestScoresOfLevel(self, scores, n):
+        largestScores = []
+        for i in range(n):
+            if not scores:
+                break
+            largestScore = max(scores, key=lambda x: x[1])
+            scores.remove(largestScore)
+            largestScores.append(largestScore)
+        return largestScores
+
+        # def resetScores(self):
+        #     scores = {"level": {}}
+        #     for level in range(1, 10+1):
+        #         scores["level"][str(level)] = {}
+        #     with open("data/scores.json", "w") as scoresFile:
+        #         json.dump(scores, scoresFile)

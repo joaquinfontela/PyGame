@@ -4,6 +4,7 @@ from TextFormatter.TextFormatter import TextFormatter
 from Config.configParser import CONFIGS
 import LevelMenu
 import SettingsMenu
+import HighScoresMenu
 import time
 
 THEME = CONFIGS["current_theme"]
@@ -40,20 +41,24 @@ class MainMenu:
         self.window.screen.fill(BACKGROUND_COLOR)
         title = TextFormatter().formatText("PySnake", FONT, 150, LOGO_COLOR)
         playButton = TextFormatter().formatText(
-            "PLAY", FONT, 100, SELECTED_COLOR if self.buttonSelected % 3 == 1 else NON_SELECTED_COLOR)
+            "PLAY", FONT, 100, SELECTED_COLOR if self.buttonSelected % 4 == 1 else NON_SELECTED_COLOR)
+        highScoresButton = TextFormatter().formatText(
+            "HIGHSCORES", FONT, 100, SELECTED_COLOR if self.buttonSelected % 4 == 2 else NON_SELECTED_COLOR)
         settingsButton = TextFormatter().formatText(
-            "SETTINGS", FONT, 100, SELECTED_COLOR if self.buttonSelected % 3 == 2 else NON_SELECTED_COLOR)
+            "SETTINGS", FONT, 100, SELECTED_COLOR if self.buttonSelected % 4 == 3 else NON_SELECTED_COLOR)
         quitButton = TextFormatter().formatText(
-            "QUIT", FONT, 100, SELECTED_COLOR if self.buttonSelected % 3 == 0 else NON_SELECTED_COLOR)
+            "QUIT", FONT, 100, SELECTED_COLOR if self.buttonSelected % 4 == 0 else NON_SELECTED_COLOR)
         screenWidth, _ = self.window.getDimensions()
         self.window.screen.blit(
             title, (screenWidth/2 - (title.get_rect()[2]/2), 80))
         self.window.screen.blit(
-            playButton, (screenWidth/2 - (playButton.get_rect()[2]/2), 325))
+            playButton, (screenWidth/2 - (playButton.get_rect()[2]/2), 300))
         self.window.screen.blit(
-            settingsButton, (screenWidth/2 - (settingsButton.get_rect()[2]/2), 450))
+            highScoresButton, (screenWidth/2 - (highScoresButton.get_rect()[2]/2), 400))
         self.window.screen.blit(
-            quitButton, (screenWidth/2 - (quitButton.get_rect()[2]/2), 575))
+            settingsButton, (screenWidth/2 - (settingsButton.get_rect()[2]/2), 500))
+        self.window.screen.blit(
+            quitButton, (screenWidth/2 - (quitButton.get_rect()[2]/2), 600))
         pygame.display.update()
 
     def _loop(self):
@@ -69,16 +74,18 @@ class MainMenu:
                         self._switchPlaySelected(event.key)
                         self._displayTexts()
                     if event.key == pygame.K_RETURN:
-                        if self.buttonSelected % 3 == 1:
+                        if self.buttonSelected % 4 == 1:
                             pygame.mixer.Sound.play(
                                 SELECT_OPTION_SOUND)
                             LevelMenu.LevelMenu(self.window)
-                        elif self.buttonSelected % 3 == 2:
+                        elif self.buttonSelected % 4 == 2:
                             pygame.mixer.Sound.play(
                                 SELECT_OPTION_SOUND)
+                            HighScoresMenu.HighScoresMenu(self.window)
+                        elif self.buttonSelected % 4 == 3:
                             SettingsMenu.SettingsMenu(self.window)
                 if event.type == pygame.QUIT or \
-                        (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and self.buttonSelected % 3 == 0):
+                        (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and self.buttonSelected % 4 == 0):
                     pygame.mixer.Sound.play(SELECT_OPTION_SOUND)
                     time.sleep(0.2)
                     self.open = False

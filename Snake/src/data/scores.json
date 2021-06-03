@@ -1,1 +1,163 @@
-{"level": {"1": {"random_id32009": {"score": 266, "date_time": "2021/6/3"}, "random_id52176": {"score": 538, "date_time": "2021/6/3"}, "random_id82055": {"score": 1108, "date_time": "2021/6/3"}, "random_id30716": {"score": 668, "date_time": "2021/6/3"}, "random_id58630": {"score": 10, "date_time": "2021/6/3"}, "random_id86565": {"score": 574, "date_time": "2021/6/3"}}, "2": {"random_id60200": {"score": 1534, "date_time": "2021/6/3"}}, "3": {}, "4": {"random_id82411": {"score": 0, "date_time": "2021/6/3"}, "random_id19804": {"score": 482, "date_time": "2021/6/3"}}, "5": {"random_id55515": {"score": 256, "date_time": "2021/6/3"}}, "6": {"random_id62907": {"score": 260, "date_time": "2021/6/3"}}, "7": {"random_id88304": {"score": 10, "date_time": "2021/6/3"}, "random_id81469": {"score": 0, "date_time": "2021/6/3"}, "random_id32052": {"score": 0, "date_time": "2021/6/3"}, "random_id27101": {"score": 50, "date_time": "2021/6/3"}}, "8": {"random_id41032": {"score": 10, "date_time": "2021/6/3"}, "random_id80221": {"score": 0, "date_time": "2021/6/3"}, "random_id16500": {"score": 0, "date_time": "2021/6/3"}, "random_id37385": {"score": 10, "date_time": "2021/6/3"}, "random_id51596": {"score": 50, "date_time": "2021/6/3"}, "random_id49816": {"score": 0, "date_time": "2021/6/3"}, "random_id98906": {"score": 0, "date_time": "2021/6/3"}, "random_id40713": {"score": 0, "date_time": "2021/6/3"}}, "9": {"random_id47554": {"score": 0, "date_time": "2021/6/3"}, "random_id73823": {"score": 0, "date_time": "2021/6/3"}, "random_id58745": {"score": 40, "date_time": "2021/6/3"}}, "10": {"random_id76139": {"score": 50, "date_time": "2021/6/3"}, "random_id50065": {"score": 0, "date_time": "2021/6/3"}, "random_id89341": {"score": 0, "date_time": "2021/6/3"}, "random_id60951": {"score": 0, "date_time": "2021/6/3"}, "random_id58876": {"score": 10, "date_time": "2021/6/3"}}}}
+{
+    "level": {
+        "1": {
+            "random_id32009": {
+                "score": 266,
+                "date_time": "2021/6/3"
+            },
+            "random_id52176": {
+                "score": 538,
+                "date_time": "2021/6/3"
+            },
+            "random_id82055": {
+                "score": 1108,
+                "date_time": "2021/6/3"
+            },
+            "random_id30716": {
+                "score": 668,
+                "date_time": "2021/6/3"
+            },
+            "random_id58630": {
+                "score": 10,
+                "date_time": "2021/6/3"
+            },
+            "random_id86565": {
+                "score": 574,
+                "date_time": "2021/6/3"
+            }
+        },
+        "2": {
+            "random_id60200": {
+                "score": 1534,
+                "date_time": "2021/6/3"
+            }
+        },
+        "3": {},
+        "4": {
+            "random_id82411": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            },
+            "random_id19804": {
+                "score": 482,
+                "date_time": "2021/6/3"
+            }
+        },
+        "5": {
+            "random_id55515": {
+                "score": 256,
+                "date_time": "2021/6/3"
+            }
+        },
+        "6": {
+            "random_id62907": {
+                "score": 260,
+                "date_time": "2021/6/3"
+            },
+            "random_id94617": {
+                "score": 50,
+                "date_time": "2021/6/3"
+            }
+        },
+        "7": {
+            "random_id88304": {
+                "score": 10,
+                "date_time": "2021/6/3"
+            },
+            "random_id81469": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            },
+            "random_id32052": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            },
+            "random_id27101": {
+                "score": 50,
+                "date_time": "2021/6/3"
+            }
+        },
+        "8": {
+            "random_id41032": {
+                "score": 10,
+                "date_time": "2021/6/3"
+            },
+            "random_id80221": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            },
+            "random_id16500": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            },
+            "random_id37385": {
+                "score": 10,
+                "date_time": "2021/6/3"
+            },
+            "random_id51596": {
+                "score": 50,
+                "date_time": "2021/6/3"
+            },
+            "random_id49816": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            },
+            "random_id98906": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            },
+            "random_id40713": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            }
+        },
+        "9": {
+            "random_id47554": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            },
+            "random_id73823": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            },
+            "random_id58745": {
+                "score": 40,
+                "date_time": "2021/6/3"
+            },
+            "random_id63477": {
+                "score": 40,
+                "date_time": "2021/6/3"
+            }
+        },
+        "10": {
+            "random_id76139": {
+                "score": 50,
+                "date_time": "2021/6/3"
+            },
+            "random_id50065": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            },
+            "random_id89341": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            },
+            "random_id60951": {
+                "score": 0,
+                "date_time": "2021/6/3"
+            },
+            "random_id58876": {
+                "score": 10,
+                "date_time": "2021/6/3"
+            },
+            "random_id99860": {
+                "score": 10,
+                "date_time": "2021/6/3"
+            },
+            "random_id73989": {
+                "score": 20,
+                "date_time": "2021/6/3"
+            }
+        }
+    }
+}
