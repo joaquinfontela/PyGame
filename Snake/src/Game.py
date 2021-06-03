@@ -62,7 +62,7 @@ class Game:
         self.specialFoodCountdown = 0
         pygame.display.update()
         pygame.mixer.music.load(GAME_MUSIC[self.level - 1])
-        pygame.mixer.music.set_volume(0.05)
+        pygame.mixer.music.set_volume(0.1)
         pygame.mixer.music.play(-1)
         while self.open:
             time.sleep(SLEEP_PER_UPDATE)

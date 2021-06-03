@@ -15,3 +15,10 @@ class ScoresManager:
             scores["level"][str(level)][str(id)] = data
         with open("data/scores.json", "w") as scoresFile:
             json.dump(scores, scoresFile)
+
+    # def resetScores(self):
+    #     scores = {"level": {}}
+    #     for level in range(1, 10+1):
+    #         scores["level"][str(level)] = {}
+    #     with open("data/scores.json", "w") as scoresFile:
+    #         json.dump(scores, scoresFile)

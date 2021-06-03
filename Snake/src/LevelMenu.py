@@ -39,15 +39,25 @@ class LevelMenu:
         self.window.screen.fill(BACKGROUND_COLOR)
         title = TextFormatter().formatText("SELECT LEVEL:", FONT, 150, LOGO_COLOR)
         level1Title = TextFormatter().formatText("1", FONT, 100,
-                                                 SELECTED_COLOR if self.buttonSelected % 5 == 1 else NON_SELECTED_COLOR)
+                                                 SELECTED_COLOR if self.buttonSelected % 10 == 1 else NON_SELECTED_COLOR)
         level2Title = TextFormatter().formatText("2", FONT, 100,
-                                                 SELECTED_COLOR if self.buttonSelected % 5 == 2 else NON_SELECTED_COLOR)
+                                                 SELECTED_COLOR if self.buttonSelected % 10 == 2 else NON_SELECTED_COLOR)
         level3Title = TextFormatter().formatText("3", FONT, 100,
-                                                 SELECTED_COLOR if self.buttonSelected % 5 == 3 else NON_SELECTED_COLOR)
+                                                 SELECTED_COLOR if self.buttonSelected % 10 == 3 else NON_SELECTED_COLOR)
         level4Title = TextFormatter().formatText("4", FONT, 100,
-                                                 SELECTED_COLOR if self.buttonSelected % 5 == 4 else NON_SELECTED_COLOR)
+                                                 SELECTED_COLOR if self.buttonSelected % 10 == 4 else NON_SELECTED_COLOR)
         level5Title = TextFormatter().formatText("5", FONT, 100,
-                                                 SELECTED_COLOR if self.buttonSelected % 5 == 0 else NON_SELECTED_COLOR)
+                                                 SELECTED_COLOR if self.buttonSelected % 10 == 5 else NON_SELECTED_COLOR)
+        level6Title = TextFormatter().formatText("6", FONT, 100,
+                                                 SELECTED_COLOR if self.buttonSelected % 10 == 6 else NON_SELECTED_COLOR)
+        level7Title = TextFormatter().formatText("7", FONT, 100,
+                                                 SELECTED_COLOR if self.buttonSelected % 10 == 7 else NON_SELECTED_COLOR)
+        level8Title = TextFormatter().formatText("8", FONT, 100,
+                                                 SELECTED_COLOR if self.buttonSelected % 10 == 8 else NON_SELECTED_COLOR)
+        level9Title = TextFormatter().formatText("9", FONT, 100,
+                                                 SELECTED_COLOR if self.buttonSelected % 10 == 9 else NON_SELECTED_COLOR)
+        level10Title = TextFormatter().formatText("10", FONT, 100,
+                                                  SELECTED_COLOR if self.buttonSelected % 10 == 0 else NON_SELECTED_COLOR)
         screenWidth, _ = self.window.getDimensions()
         self.window.screen.blit(
             title, (screenWidth/2 - (title.get_rect()[2]/2), 80))
@@ -61,6 +71,16 @@ class LevelMenu:
             level4Title, (4 * screenWidth/6, 400))
         self.window.screen.blit(
             level5Title, (5 * screenWidth/6, 400))
+        self.window.screen.blit(
+            level6Title, (screenWidth/6, 550))
+        self.window.screen.blit(
+            level7Title, (2 * screenWidth/6, 550))
+        self.window.screen.blit(
+            level8Title, (3 * screenWidth/6, 550))
+        self.window.screen.blit(
+            level9Title, (4 * screenWidth/6, 550))
+        self.window.screen.blit(
+            level10Title, (5 * screenWidth/6, 550))
         pygame.display.update()
 
     def _loop(self):
@@ -72,14 +92,14 @@ class LevelMenu:
         while self.open:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
-                    if event.key in (pygame.K_LEFT, pygame.K_RIGHT):
+                    if event.key in (pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN):
                         self._changeLevelSelected(event.key)
                         self._displayTexts()
                     if event.key == pygame.K_RETURN:
                         pygame.mixer.Sound.play(
                             SELECT_START_GAME_SOUND)
-                        level = self.buttonSelected % 5
-                        Game.Game(self.window, level if level > 0 else 5)
+                        level = self.buttonSelected % 10
+                        Game.Game(self.window, level if level > 0 else 10)
                 if event.type == pygame.QUIT or \
                         (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and self.buttonSelected % 3 == 0):
                     pygame.mixer.Sound.play(SELECT_OPTION_SOUND)
@@ -91,5 +111,9 @@ class LevelMenu:
         pygame.mixer.Sound.play(CHANGE_SELECTED_OPTION_SOUND)
         if eventKey == pygame.K_LEFT:
             self.buttonSelected -= 1
-        else:
+        elif eventKey == pygame.K_RIGHT:
             self.buttonSelected += 1
+        elif eventKey == pygame.K_UP:
+            self.buttonSelected -= 5
+        else:
+            self.buttonSelected += 5

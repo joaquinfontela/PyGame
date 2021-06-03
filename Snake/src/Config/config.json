@@ -247,11 +247,16 @@
         "select_option": "audio/select_option.ogg",
         "select_start_game": "audio/select_start_game.ogg",
         "game_music": [
-            "audio/music/StereoMadness.ogg",
+            "audio/music/Alan Walker-Fade.ogg",
             "audio/music/BackOnTrack.ogg",
             "audio/music/Polargeist.ogg",
+            "audio/music/Disfigure-Blank.ogg",
             "audio/music/Tobu-DejaVu.ogg",
-            "audio/music/Tobu-Lightness.ogg"
+            "audio/music/Ahrix - Nova.ogg",
+            "audio/music/Tobu-Vicious.ogg",
+            "audio/music/Alan Walker-Spectre.ogg",
+            "audio/music/Tobu-Lightness.ogg",
+            "audio/music/Koopa.ogg"
         ]
     },
     "speed_diameters_per_second": 10
