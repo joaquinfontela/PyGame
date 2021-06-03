@@ -38,6 +38,8 @@ SPECIAL_FOOD_COLLECTED_SOUND = pygame.mixer.Sound(
     SPECIAL_FOOD_COLLECTED_SOUND_PATH)
 SPECIAL_FOOD_COLLECTED_SOUND.set_volume(0.5)
 
+ARROW_KEYS = (pygame.K_UP, pygame.K_DOWN, pygame.K_RIGHT, pygame.K_LEFT)
+
 
 class Game:
 
@@ -58,6 +60,7 @@ class Game:
             self.window, LevelConfiguration(self.window, self.level).getInitialPosAndDirection(), self.walls)
         self._setRandomFoodPosition()
         self.changedDirection = False
+        self.pendingEvents = []
         self.specialFoodPosition = None
         self.specialFoodCountdown = 0
         pygame.display.update()
@@ -68,19 +71,31 @@ class Game:
             time.sleep(SLEEP_PER_UPDATE)
             self.moves += 1
             self.changedDirection = False
-            for event in pygame.event.get():
+            self._postPendingEvents()
+            eventList = pygame.event.get()
+            for event in eventList:
                 self.changedDirection = False
                 if event.type == pygame.QUIT:
                     self.open = False
                     self.window.stopRunning()
-                if event.type == pygame.KEYUP:
-                    self.handleKeyDown(event)
+                if event.type == pygame.KEYUP and event.key in ARROW_KEYS:
+                    self.handleKeyUp(event)
                     self.randomSpecialFoodSpawn()
+                    self._savePendingEvents(event, eventList)
+                    break
             if not self.changedDirection:
                 self.updateSnakePosition()
                 self.randomSpecialFoodSpawn()
 
-    def handleKeyDown(self, event):
+    def _postPendingEvents(self):
+        for e in self.pendingEvents:
+            pygame.event.post(e)
+
+    def _savePendingEvents(self, lastEventProcessed, eventList):
+        lastEventProcessedIdx = eventList.index(lastEventProcessed)
+        self.pendingEvents = eventList[lastEventProcessedIdx + 1:]
+
+    def handleKeyUp(self, event):
         '''
         Handles the event when a key is pressed.
         It ignores the event if the key pressed is not one of the four arrows.
@@ -93,8 +108,6 @@ class Game:
             self.snake.changeDirection(LeftDirection())
         elif event.key == pygame.K_RIGHT:
             self.snake.changeDirection(RightDirection())
-        else:
-            return
         self.changedDirection = True
         self.updateSnakePosition()
 
