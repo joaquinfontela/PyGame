@@ -27,7 +27,8 @@ CHANGE_SELECTED_OPTION_SOUND_PATH = CONFIGS["sounds"]["change_selected_option"]
 SELECT_OPTION_SOUND_PATH = CONFIGS["sounds"]["select_option"]
 SELECT_START_GAME_SOUND_PATH = CONFIGS["sounds"]["select_start_game"]
 pygame.mixer.init()
-CHANGE_SELECTED_OPTION_SOUND = pygame.mixer.Sound(CHANGE_SELECTED_OPTION_SOUND_PATH)
+CHANGE_SELECTED_OPTION_SOUND = pygame.mixer.Sound(
+    CHANGE_SELECTED_OPTION_SOUND_PATH)
 CHANGE_SELECTED_OPTION_SOUND.set_volume(0.5)
 SELECT_OPTION_SOUND = pygame.mixer.Sound(SELECT_OPTION_SOUND_PATH)
 SELECT_OPTION_SOUND.set_volume(0.5)
@@ -69,7 +70,8 @@ class SettingsMenu:
             THEME_DICT[CONFIGS["current_theme"]], FONT, 75, NON_SELECTED_COLOR
         )
         speedSwitch = TextFormatter().formatText(
-            str(CONFIGS["speed_diameters_per_second"]), FONT, 75, NON_SELECTED_COLOR
+            str(CONFIGS["speed_diameters_per_second"]
+                ), FONT, 75, NON_SELECTED_COLOR
         )
         screenWidth, _ = self.window.getDimensions()
         self.window.screen.blit(
@@ -77,22 +79,27 @@ class SettingsMenu:
         )
         self.window.screen.blit(
             themeTitle,
-            (screenWidth / 2 - (themeTitle.get_rect()[2] / 2) - screenWidth / 4, 350),
+            (screenWidth / 2 - (themeTitle.get_rect()
+             [2] / 2) - screenWidth / 4, 350),
         )
         self.window.screen.blit(
             speedTitle,
-            (screenWidth / 2 - (speedTitle.get_rect()[2] / 2) - screenWidth / 4, 500),
+            (screenWidth / 2 - (speedTitle.get_rect()
+             [2] / 2) - screenWidth / 4, 500),
         )
         self.window.screen.blit(
             themeSwitch,
-            (screenWidth / 2 - (themeSwitch.get_rect()[2] / 2) + screenWidth / 4, 350),
+            (screenWidth / 2 - (themeSwitch.get_rect()
+             [2] / 2) + screenWidth / 4, 350),
         )
         self.window.screen.blit(
             speedSwitch,
-            (screenWidth / 2 - (speedSwitch.get_rect()[2] / 2) + screenWidth / 4, 500),
+            (screenWidth / 2 - (speedSwitch.get_rect()
+             [2] / 2) + screenWidth / 4, 500),
         )
         self.window.screen.blit(
-            instructions, (screenWidth / 2 - (instructions.get_rect()[2] / 2), 650)
+            instructions, (screenWidth / 2 -
+                           (instructions.get_rect()[2] / 2), 650)
         )
         pygame.display.update()
 
@@ -111,7 +118,7 @@ class SettingsMenu:
                         os.execv(
                             sys.executable,
                             [
-                                "python",
+                                "python3",
                                 sys.modules["__main__"].__file__,
                                 *sys.argv[1:],
                             ],
@@ -131,7 +138,8 @@ class SettingsMenu:
 
     def _handleSettingsChange(self, eventKey):
         if self.themeTitleSelected:
-            currentThemeIndex = list(THEME_DICT.keys()).index(CONFIGS["current_theme"])
+            currentThemeIndex = list(THEME_DICT.keys()).index(
+                CONFIGS["current_theme"])
             if eventKey == pygame.K_LEFT:
                 CONFIGS["current_theme"] = list(THEME_DICT.keys())[
                     (currentThemeIndex - 1) % 5
