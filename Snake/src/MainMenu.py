@@ -5,6 +5,7 @@ from Config.configParser import CONFIGS
 import LevelMenu
 import SettingsMenu
 import HighScoresMenu
+import SaveScoreMenu
 import time
 
 THEME = CONFIGS["current_theme"]

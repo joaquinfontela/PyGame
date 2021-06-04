@@ -100,8 +100,7 @@ class LevelMenu:
                             SELECT_START_GAME_SOUND)
                         level = self.buttonSelected % 10
                         Game.Game(self.window, level if level > 0 else 10)
-                if event.type == pygame.QUIT or \
-                        (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN):
+                if event.type == pygame.QUIT:
                     pygame.mixer.Sound.play(SELECT_OPTION_SOUND)
                     time.sleep(0.2)
                     self.open = False

@@ -134,8 +134,7 @@ class HighScoresMenu:
                         self._displayTexts()
                     if event.key == pygame.K_q:
                         MainMenu.MainMenu(self.window)
-                if event.type == pygame.QUIT or \
-                        (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN):
+                if event.type == pygame.QUIT:
                     pygame.mixer.Sound.play(SELECT_OPTION_SOUND)
                     time.sleep(0.2)
                     self.open = False

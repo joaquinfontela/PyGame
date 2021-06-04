@@ -1,3 +1,4 @@
+from SaveScoreMenu import SaveScoreMenu
 from Config.configParser import CONFIGS
 import pygame
 import time
@@ -10,8 +11,6 @@ from SnakeUtils.Direction.DownDirection import DownDirection
 from random import randrange
 from TextFormatter.TextFormatter import TextFormatter
 from LevelConfiguration import LevelConfiguration
-import MainMenu
-from data.ScoresManager import ScoresManager
 
 CIRCLE_RADIUS = CONFIGS["circle_diameter"]/2
 FONT = CONFIGS["font"]
@@ -128,9 +127,7 @@ class Game:
             pygame.mixer.Sound.play(PLAYER_LOST_SOUND)
             pygame.mixer.music.stop()
             self.open = False
-            ScoresManager().save(
-                f"random_id{randint(10000, 99999)}", self.score, self.level)
-            MainMenu.MainMenu(self.window)
+            SaveScoreMenu(self.window, self.score, self.level)
 
     def _setRandomFoodPosition(self):
         '''
