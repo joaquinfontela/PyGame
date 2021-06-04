@@ -3,11 +3,10 @@ from MainMenu import MainMenu
 
 
 class Window:
-
     def __init__(self, width, height):
-        '''
+        """
         Initializes a Window object with width and height attributes.
-        '''
+        """
         pygame.init()
         self.width = width
         self.height = height
@@ -22,16 +21,18 @@ class Window:
         return (self.width, self.height)
 
     def display(self):
+        icon = pygame.image.load("images/icon.png")
+        pygame.display.set_icon(icon)
         pygame.mouse.set_visible(False)
         pygame.display.flip()
-        pygame.display.set_caption('PySnake')
+        pygame.display.set_caption("PySnake")
         self.running = True
         self._mainLoop()
 
     def _mainLoop(self):
-        '''
+        """
         Initializes the main loop of the application.
-        '''
+        """
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
