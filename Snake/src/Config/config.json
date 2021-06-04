@@ -242,6 +242,7 @@
     "sounds": {
         "player_lost": "audio/player_lost.ogg",
         "food_collected": "audio/food_collected.ogg",
+        "keyboard_press_sound": "audio/keyboard_press.ogg",
         "special_food_collected": "audio/special_food_collected.ogg",
         "change_selected_option": "audio/change_selected_option.ogg",
         "select_option": "audio/select_option.ogg",

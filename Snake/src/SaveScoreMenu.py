@@ -12,10 +12,13 @@ LOGO_COLOR = CONFIGS["colors"][THEME]["logo"]
 FONT = "Fonts/retro.ttf"
 
 SELECT_OPTION_SOUND_PATH = CONFIGS["sounds"]["select_option"]
+KEYBOARD_PRESS_SOUND_PATH = CONFIGS["sounds"]["keyboard_press_sound"]
 pygame.mixer.init()
 SELECT_OPTION_SOUND = pygame.mixer.Sound(
     SELECT_OPTION_SOUND_PATH)
+KEYBOARD_PRESS_SOUND = pygame.mixer.Sound(KEYBOARD_PRESS_SOUND_PATH)
 SELECT_OPTION_SOUND.set_volume(0.5)
+KEYBOARD_PRESS_SOUND.set_volume(0.5)
 
 
 class SaveScoreMenu:
@@ -73,11 +76,14 @@ class SaveScoreMenu:
                         if self._emptyId():
                             self.id = f'randomid{randint(10000,99999)}'
                         self.open = False
+                        pygame.mixer.Sound.play(SELECT_OPTION_SOUND)
                         ScoresManager().save(self.id, self.score, self.level)
                         MainMenu.MainMenu(self.window)
                     elif event.key == pygame.K_BACKSPACE:
+                        pygame.mixer.Sound.play(KEYBOARD_PRESS_SOUND)
                         self.id = self.id[0:-1]
                     else:
+                        pygame.mixer.Sound.play(KEYBOARD_PRESS_SOUND)
                         self.id += event.unicode
                 if event.type == pygame.QUIT:
                     pygame.mixer.Sound.play(SELECT_OPTION_SOUND)
