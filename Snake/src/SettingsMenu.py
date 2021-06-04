@@ -58,9 +58,9 @@ class SettingsMenu:
             SELECTED_COLOR if not self.themeTitleSelected else NON_SELECTED_COLOR,
         )
         instructions = TextFormatter().formatText(
-            "PRESS 'S' TO SAVE. PRESS 'Q' TO GO TO THE MAIN MENU."
+            "PRESS 'S' TO SAVE AND REBOOT. PRESS 'Q' TO GO TO THE MAIN MENU WITHOUT SAVING."
             if self.showInstructions
-            else "CHANGES SAVED. REBOOT THE GAME FOR UPDATE.",
+            else "CHANGES SAVED. REBOOTING THE GAME TO UPDATE.",
             FONT,
             35,
             LOGO_COLOR,
@@ -108,7 +108,15 @@ class SettingsMenu:
                         self._displayTexts()
                     if event.key == pygame.K_s:
                         self._handleSave()
-                        # os.execv(sys.executable, ["python", __file__, *sys.argv[1:]])
+                        os.execv(
+                            sys.executable,
+                            [
+                                "python",
+                                sys.modules["__main__"].__file__,
+                                *sys.argv[1:],
+                            ],
+                        )
+                        exit()
                     if event.key == pygame.K_q:
                         MainMenu.MainMenu(self.window)
                 if event.type == pygame.QUIT:
