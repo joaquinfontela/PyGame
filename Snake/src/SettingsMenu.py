@@ -3,6 +3,8 @@ from Config.configParser import CONFIGS, updateColorTheme, updateSpeed
 from TextFormatter.TextFormatter import TextFormatter
 import pygame
 import time
+import os
+import sys
 
 THEME = CONFIGS["current_theme"]
 BACKGROUND_COLOR = CONFIGS["colors"][THEME]["background"]
@@ -11,11 +13,13 @@ SELECTED_COLOR = CONFIGS["colors"][THEME]["selected_option"]
 NON_SELECTED_COLOR = CONFIGS["colors"][THEME]["non_selected_option"]
 FONT = "Fonts/retro.ttf"
 
-THEME_DICT = {"classic": "CLASSIC",
-              "black_and_white": "B&w",
-              "white_and_black": "W&B",
-              "fire": "FIRE",
-              "oceanic": "OCEANIC"}
+THEME_DICT = {
+    "classic": "CLASSIC",
+    "black_and_white": "B&w",
+    "white_and_black": "W&B",
+    "fire": "FIRE",
+    "oceanic": "OCEANIC",
+}
 
 SPEED_OPTIONS = [5, 10, 15]
 
@@ -23,16 +27,13 @@ CHANGE_SELECTED_OPTION_SOUND_PATH = CONFIGS["sounds"]["change_selected_option"]
 SELECT_OPTION_SOUND_PATH = CONFIGS["sounds"]["select_option"]
 SELECT_START_GAME_SOUND_PATH = CONFIGS["sounds"]["select_start_game"]
 pygame.mixer.init()
-CHANGE_SELECTED_OPTION_SOUND = pygame.mixer.Sound(
-    CHANGE_SELECTED_OPTION_SOUND_PATH)
+CHANGE_SELECTED_OPTION_SOUND = pygame.mixer.Sound(CHANGE_SELECTED_OPTION_SOUND_PATH)
 CHANGE_SELECTED_OPTION_SOUND.set_volume(0.5)
-SELECT_OPTION_SOUND = pygame.mixer.Sound(
-    SELECT_OPTION_SOUND_PATH)
+SELECT_OPTION_SOUND = pygame.mixer.Sound(SELECT_OPTION_SOUND_PATH)
 SELECT_OPTION_SOUND.set_volume(0.5)
 
 
 class SettingsMenu:
-
     def __init__(self, window):
         self.window = window
         self.open = True
@@ -44,31 +45,55 @@ class SettingsMenu:
     def _displayTexts(self):
         self.window.screen.fill(BACKGROUND_COLOR)
         title = TextFormatter().formatText("SETTINGS", FONT, 150, LOGO_COLOR)
-        themeTitle = TextFormatter().formatText("COLOR THEME", FONT, 75,
-                                                SELECTED_COLOR if self.themeTitleSelected else NON_SELECTED_COLOR)
-        speedTitle = TextFormatter().formatText("SNAKE SPEED", FONT, 75,
-                                                SELECTED_COLOR if not self.themeTitleSelected else NON_SELECTED_COLOR)
+        themeTitle = TextFormatter().formatText(
+            "COLOR THEME",
+            FONT,
+            75,
+            SELECTED_COLOR if self.themeTitleSelected else NON_SELECTED_COLOR,
+        )
+        speedTitle = TextFormatter().formatText(
+            "SNAKE SPEED",
+            FONT,
+            75,
+            SELECTED_COLOR if not self.themeTitleSelected else NON_SELECTED_COLOR,
+        )
         instructions = TextFormatter().formatText(
             "PRESS 'S' TO SAVE. PRESS 'Q' TO GO TO THE MAIN MENU."
-            if self.showInstructions else "CHANGES SAVED. REBOOT THE GAME FOR UPDATE.",
-            FONT, 35, LOGO_COLOR)
+            if self.showInstructions
+            else "CHANGES SAVED. REBOOT THE GAME FOR UPDATE.",
+            FONT,
+            35,
+            LOGO_COLOR,
+        )
         themeSwitch = TextFormatter().formatText(
-            THEME_DICT[CONFIGS["current_theme"]], FONT, 75, NON_SELECTED_COLOR)
+            THEME_DICT[CONFIGS["current_theme"]], FONT, 75, NON_SELECTED_COLOR
+        )
         speedSwitch = TextFormatter().formatText(
-            str(CONFIGS["speed_diameters_per_second"]), FONT, 75, NON_SELECTED_COLOR)
+            str(CONFIGS["speed_diameters_per_second"]), FONT, 75, NON_SELECTED_COLOR
+        )
         screenWidth, _ = self.window.getDimensions()
         self.window.screen.blit(
-            title, (screenWidth/2 - (title.get_rect()[2]/2), 80))
+            title, (screenWidth / 2 - (title.get_rect()[2] / 2), 80)
+        )
         self.window.screen.blit(
-            themeTitle, (screenWidth/2 - (themeTitle.get_rect()[2]/2) - screenWidth/4, 350))
+            themeTitle,
+            (screenWidth / 2 - (themeTitle.get_rect()[2] / 2) - screenWidth / 4, 350),
+        )
         self.window.screen.blit(
-            speedTitle, (screenWidth/2 - (speedTitle.get_rect()[2]/2) - screenWidth/4, 500))
+            speedTitle,
+            (screenWidth / 2 - (speedTitle.get_rect()[2] / 2) - screenWidth / 4, 500),
+        )
         self.window.screen.blit(
-            themeSwitch, (screenWidth/2 - (themeSwitch.get_rect()[2]/2) + screenWidth/4, 350))
+            themeSwitch,
+            (screenWidth / 2 - (themeSwitch.get_rect()[2] / 2) + screenWidth / 4, 350),
+        )
         self.window.screen.blit(
-            speedSwitch, (screenWidth/2 - (speedSwitch.get_rect()[2]/2) + screenWidth/4, 500))
+            speedSwitch,
+            (screenWidth / 2 - (speedSwitch.get_rect()[2] / 2) + screenWidth / 4, 500),
+        )
         self.window.screen.blit(
-            instructions, (screenWidth/2 - (instructions.get_rect()[2]/2), 650))
+            instructions, (screenWidth / 2 - (instructions.get_rect()[2] / 2), 650)
+        )
         pygame.display.update()
 
     def _loop(self):
@@ -83,6 +108,7 @@ class SettingsMenu:
                         self._displayTexts()
                     if event.key == pygame.K_s:
                         self._handleSave()
+                        # os.execv(sys.executable, ["python", __file__, *sys.argv[1:]])
                     if event.key == pygame.K_q:
                         MainMenu.MainMenu(self.window)
                 if event.type == pygame.QUIT:
@@ -97,23 +123,27 @@ class SettingsMenu:
 
     def _handleSettingsChange(self, eventKey):
         if self.themeTitleSelected:
-            currentThemeIndex = list(THEME_DICT.keys()).index(
-                CONFIGS["current_theme"])
+            currentThemeIndex = list(THEME_DICT.keys()).index(CONFIGS["current_theme"])
             if eventKey == pygame.K_LEFT:
                 CONFIGS["current_theme"] = list(THEME_DICT.keys())[
-                    (currentThemeIndex - 1) % 5]
+                    (currentThemeIndex - 1) % 5
+                ]
             else:
                 CONFIGS["current_theme"] = list(THEME_DICT.keys())[
-                    (currentThemeIndex + 1) % 5]
+                    (currentThemeIndex + 1) % 5
+                ]
         else:
             currentSpeedIndex = SPEED_OPTIONS.index(
-                CONFIGS["speed_diameters_per_second"])
+                CONFIGS["speed_diameters_per_second"]
+            )
             if eventKey == pygame.K_LEFT:
                 CONFIGS["speed_diameters_per_second"] = SPEED_OPTIONS[
-                    (currentSpeedIndex - 1) % 3]
+                    (currentSpeedIndex - 1) % 3
+                ]
             else:
                 CONFIGS["speed_diameters_per_second"] = SPEED_OPTIONS[
-                    (currentSpeedIndex + 1) % 3]
+                    (currentSpeedIndex + 1) % 3
+                ]
 
     def _handleSave(self):
         updateColorTheme(CONFIGS["current_theme"])
