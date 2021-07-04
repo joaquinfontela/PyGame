@@ -1,10 +1,13 @@
 import json
 import time
 
+SCORES_PATH = "model/data/scores.json"
+
+
 class ScoresManager:
 
     def save(self, id, score, level):
-        with open("data/scores.json", "r") as scoresFile:
+        with open(SCORES_PATH, "r") as scoresFile:
             scores = json.load(scoresFile)
             currentTime = time.gmtime()
             data = {
@@ -12,11 +15,11 @@ class ScoresManager:
                 "date_time": f"{currentTime.tm_year}/{currentTime.tm_mon}/{currentTime.tm_mday}"
             }
             scores["level"][str(level)][str(id)] = data
-        with open("data/scores.json", "w") as scoresFile:
+        with open(SCORES_PATH, "w") as scoresFile:
             json.dump(scores, scoresFile)
 
     def get_n_HighestScores(self, level, n):
-        with open("data/scores.json", "r") as scoresFile:
+        with open(SCORES_PATH, "r") as scoresFile:
             scores = json.load(scoresFile)
             levelScores = scores["level"][str(level)]
             levelScores = levelScores.items()
@@ -38,7 +41,7 @@ class ScoresManager:
 #         scores = {"level": {}}
 #         for level in range(1, 10+1):
 #             scores["level"][str(level)] = {}
-#         with open("data/scores.json", "w") as scoresFile:
+#         with open(SCORES_PATH, "w") as scoresFile:
 #             json.dump(scores, scoresFile)
 
 

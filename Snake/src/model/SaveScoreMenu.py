@@ -1,15 +1,15 @@
 import pygame
 import time
 from random import randint
-from TextFormatter.TextFormatter import TextFormatter
-from Config.configParser import CONFIGS
-from data.ScoresManager import ScoresManager
-import MainMenu
+from model.TextFormatter.TextFormatter import TextFormatter
+from model.Config.configParser import CONFIGS
+from model.data.ScoresManager import ScoresManager
+import model.MainMenu
 
 THEME = CONFIGS["current_theme"]
 BACKGROUND_COLOR = CONFIGS["colors"][THEME]["background"]
 LOGO_COLOR = CONFIGS["colors"][THEME]["logo"]
-FONT = "Fonts/retro.ttf"
+FONT = CONFIGS["font"]
 
 SELECT_OPTION_SOUND_PATH = CONFIGS["sounds"]["select_option"]
 KEYBOARD_PRESS_SOUND_PATH = CONFIGS["sounds"]["keyboard_press_sound"]
@@ -78,7 +78,7 @@ class SaveScoreMenu:
                         self.open = False
                         pygame.mixer.Sound.play(SELECT_OPTION_SOUND)
                         ScoresManager().save(self.id, self.score, self.level)
-                        MainMenu.MainMenu(self.window)
+                        model.MainMenu.MainMenu(self.window)
                     elif event.key == pygame.K_BACKSPACE:
                         pygame.mixer.Sound.play(KEYBOARD_PRESS_SOUND)
                         self.id = self.id[0:-1]

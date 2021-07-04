@@ -1,8 +1,7 @@
-from pygame.constants import SYSTEM_CURSOR_SIZENWSE
-from Config.configParser import CONFIGS
-from SnakeUtils.Direction.Direction import Direction
-from SnakeUtils.Direction.RightDirection import RightDirection
-from SnakeUtils.Direction.DownDirection import DownDirection
+from model.Config.configParser import CONFIGS
+from model.SnakeUtils.Direction.Direction import Direction
+from model.SnakeUtils.Direction.RightDirection import RightDirection
+from model.SnakeUtils.Direction.DownDirection import DownDirection
 
 CIRCLE_DIAMETER = CONFIGS["circle_diameter"]
 CIRCLE_RADIUS = int(CIRCLE_DIAMETER/2)

@@ -1,5 +1,4 @@
 import pygame
-from MainMenu import MainMenu
 
 
 class Window:
@@ -21,11 +20,11 @@ class Window:
         return (self.width, self.height)
 
     def display(self):
-        icon = pygame.image.load("images/icon.png")
+        icon = pygame.image.load("model/images/icon.png")
         pygame.display.set_icon(icon)
         pygame.mouse.set_visible(False)
         pygame.display.flip()
-        pygame.display.set_caption("PySnake")
+        pygame.display.set_caption("MemoPinball")
         self.running = True
         self._mainLoop()
 
@@ -38,7 +37,8 @@ class Window:
                 if event.type == pygame.QUIT:
                     self.stopRunning()
 
-            MainMenu(self)
+            # MainMenu(self)
+            continue
 
     def stopRunning(self):
         self.running = False

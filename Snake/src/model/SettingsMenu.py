@@ -1,6 +1,6 @@
-import MainMenu
-from Config.configParser import CONFIGS, updateColorTheme, updateSpeed
-from TextFormatter.TextFormatter import TextFormatter
+import model.MainMenu
+from model.Config.configParser import CONFIGS, updateColorTheme, updateSpeed
+from model.TextFormatter.TextFormatter import TextFormatter
 import pygame
 import time
 import os
@@ -11,7 +11,7 @@ BACKGROUND_COLOR = CONFIGS["colors"][THEME]["background"]
 LOGO_COLOR = CONFIGS["colors"][THEME]["logo"]
 SELECTED_COLOR = CONFIGS["colors"][THEME]["selected_option"]
 NON_SELECTED_COLOR = CONFIGS["colors"][THEME]["non_selected_option"]
-FONT = "Fonts/retro.ttf"
+FONT = CONFIGS["font"]
 
 THEME_DICT = {
     "classic": "CLASSIC",
@@ -125,7 +125,7 @@ class SettingsMenu:
                         )
                         exit()
                     if event.key == pygame.K_q:
-                        MainMenu.MainMenu(self.window)
+                        model.MainMenu.MainMenu(self.window)
                 if event.type == pygame.QUIT:
                     pygame.mixer.Sound.play(SELECT_OPTION_SOUND)
                     time.sleep(0.2)

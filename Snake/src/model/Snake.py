@@ -1,5 +1,5 @@
 import pygame
-from Config.configParser import CONFIGS
+from model.Config.configParser import CONFIGS
 
 CIRCLE_DIAMETER = CONFIGS["circle_diameter"]
 

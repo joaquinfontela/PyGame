@@ -1,16 +1,16 @@
 import pygame
-from data.ScoresManager import ScoresManager
-from TextFormatter.TextFormatter import TextFormatter
-from Config.configParser import CONFIGS
+from model.data.ScoresManager import ScoresManager
+from model.TextFormatter.TextFormatter import TextFormatter
+from model.Config.configParser import CONFIGS
 import time
-import MainMenu
+import model.MainMenu
 
 THEME = CONFIGS["current_theme"]
 BACKGROUND_COLOR = CONFIGS["colors"][THEME]["background"]
 LOGO_COLOR = CONFIGS["colors"][THEME]["logo"]
 SELECTED_COLOR = CONFIGS["colors"][THEME]["selected_option"]
 NON_SELECTED_COLOR = CONFIGS["colors"][THEME]["non_selected_option"]
-FONT = "Fonts/retro.ttf"
+FONT = CONFIGS["font"]
 
 CHANGE_SELECTED_OPTION_SOUND_PATH = CONFIGS["sounds"]["change_selected_option"]
 SELECT_OPTION_SOUND_PATH = CONFIGS["sounds"]["select_option"]
@@ -133,7 +133,7 @@ class HighScoresMenu:
                         self._changeLevelSelected(event.key)
                         self._displayTexts()
                     if event.key == pygame.K_q:
-                        MainMenu.MainMenu(self.window)
+                        model.MainMenu.MainMenu(self.window)
                 if event.type == pygame.QUIT:
                     pygame.mixer.Sound.play(SELECT_OPTION_SOUND)
                     time.sleep(0.2)

@@ -1,11 +1,10 @@
 import pygame
 from pygame.constants import KEYUP
-from TextFormatter.TextFormatter import TextFormatter
-from Config.configParser import CONFIGS
-import LevelMenu
-import SettingsMenu
-import HighScoresMenu
-import SaveScoreMenu
+from model.TextFormatter.TextFormatter import TextFormatter
+from model.Config.configParser import CONFIGS
+import model.LevelMenu
+import model.SettingsMenu
+import model.HighScoresMenu
 import time
 
 THEME = CONFIGS["current_theme"]
@@ -13,7 +12,7 @@ BACKGROUND_COLOR = CONFIGS["colors"][THEME]["background"]
 LOGO_COLOR = CONFIGS["colors"][THEME]["logo"]
 SELECTED_COLOR = CONFIGS["colors"][THEME]["selected_option"]
 NON_SELECTED_COLOR = CONFIGS["colors"][THEME]["non_selected_option"]
-FONT = "Fonts/retro.ttf"
+FONT = CONFIGS["font"]
 
 CHANGE_SELECTED_OPTION_SOUND_PATH = CONFIGS["sounds"]["change_selected_option"]
 SELECT_OPTION_SOUND_PATH = CONFIGS["sounds"]["select_option"]
@@ -78,13 +77,13 @@ class MainMenu:
                         if self.buttonSelected % 4 == 1:
                             pygame.mixer.Sound.play(
                                 SELECT_OPTION_SOUND)
-                            LevelMenu.LevelMenu(self.window)
+                            model.LevelMenu.LevelMenu(self.window)
                         elif self.buttonSelected % 4 == 2:
                             pygame.mixer.Sound.play(
                                 SELECT_OPTION_SOUND)
-                            HighScoresMenu.HighScoresMenu(self.window)
+                            model.HighScoresMenu.HighScoresMenu(self.window)
                         elif self.buttonSelected % 4 == 3:
-                            SettingsMenu.SettingsMenu(self.window)
+                            model.SettingsMenu.SettingsMenu(self.window)
                 if event.type == pygame.QUIT or \
                         (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and self.buttonSelected % 4 == 0):
                     pygame.mixer.Sound.play(SELECT_OPTION_SOUND)

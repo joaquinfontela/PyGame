@@ -1,16 +1,15 @@
-from SaveScoreMenu import SaveScoreMenu
-from Config.configParser import CONFIGS
+from model.SaveScoreMenu import SaveScoreMenu
+from model.Config.configParser import CONFIGS
 import pygame
 import time
-from random import randint
-from Snake import Snake, CIRCLE_DIAMETER
-from SnakeUtils.Direction.RightDirection import RightDirection
-from SnakeUtils.Direction.LeftDirection import LeftDirection
-from SnakeUtils.Direction.UpDirection import UpDirection
-from SnakeUtils.Direction.DownDirection import DownDirection
+from model.Snake import Snake, CIRCLE_DIAMETER
+from model.SnakeUtils.Direction.RightDirection import RightDirection
+from model.SnakeUtils.Direction.LeftDirection import LeftDirection
+from model.SnakeUtils.Direction.UpDirection import UpDirection
+from model.SnakeUtils.Direction.DownDirection import DownDirection
 from random import randrange
-from TextFormatter.TextFormatter import TextFormatter
-from LevelConfiguration import LevelConfiguration
+from model.TextFormatter.TextFormatter import TextFormatter
+from model.LevelConfiguration import LevelConfiguration
 
 CIRCLE_RADIUS = CONFIGS["circle_diameter"]/2
 FONT = CONFIGS["font"]
