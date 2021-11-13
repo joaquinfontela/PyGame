@@ -25,9 +25,9 @@ class ScoresManager:
             levelScores = levelScores.items()
             levelScores = list(map(lambda x: [x[0], x[1]["score"],
                                               x[1]["date_time"]], list(levelScores)))
-            return self.getNHighestScoresOfLevel(levelScores, n)
+            return self.getNHighestScores(levelScores, n)
 
-    def getNHighestScoresOfLevel(self, scores, n):
+    def getNHighestScores(self, scores, n):
         largestScores = []
         for i in range(n):
             if not scores:
@@ -37,12 +37,12 @@ class ScoresManager:
             largestScores.append(largestScore)
         return largestScores
 
-#     def resetScores(self):
-#         scores = {"level": {}}
-#         for level in range(1, 10+1):
-#             scores["level"][str(level)] = {}
-#         with open(SCORES_PATH, "w") as scoresFile:
-#             json.dump(scores, scoresFile)
+    def resetScores(self):
+        scores = {"level": {}}
+        for level in range(1, 10+1):
+            scores["level"][str(level)] = {}
+        with open("scores.json", "w") as scoresFile:
+            json.dump(scores, scoresFile)
 
 
-# ScoresManager().resetScores()
+ScoresManager().resetScores()
